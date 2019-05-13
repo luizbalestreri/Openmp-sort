@@ -3,8 +3,8 @@
 #include "omp.h"
 using namespace std;
 
-int n = 2000000;
-int * Vet = new int [2000000];
+int n = 60000000;
+int * Vet = new int [60000000];
 
 void generate_list(int * x, int n) {
    int i,j,t;
@@ -56,7 +56,7 @@ void mergeSortSerial(int aux[], int left, int right){
 
 void mergeSort (int aux[], int left, int right){
 	if (left < right){
-		if ((right-left) > 1000000){
+		if ((right-left) > 100000){
 			int middle = (left + right)/2;
 		   #pragma omp task firstprivate (aux, left, middle)
 				mergeSort(aux,left,middle); //call 1
@@ -87,60 +87,6 @@ int main(){
       #pragma omp single
  		mergeSort(Vet, 0, n-1);
    }
-   	generate_list(Vet, n);
-	   #pragma omp parallel
-   {
-      #pragma omp single
- 		mergeSort(Vet, 0, n-1);
-   }
-   	generate_list(Vet, n);
-	   #pragma omp parallel
-   {
-      #pragma omp single
- 		mergeSort(Vet, 0, n-1);
-   }
-   	generate_list(Vet, n);
-	   #pragma omp parallel
-   {
-      #pragma omp single
- 		mergeSort(Vet, 0, n-1);
-   }
-   	generate_list(Vet, n);
-	   #pragma omp parallel
-   {
-      #pragma omp single
- 		mergeSort(Vet, 0, n-1);
-   }
-   	generate_list(Vet, n);
-	   #pragma omp parallel
-   {
-      #pragma omp single
- 		mergeSort(Vet, 0, n-1);
-   }
-   	generate_list(Vet, n);
-	   #pragma omp parallel
-   {
-      #pragma omp single
- 		mergeSort(Vet, 0, n-1);
-   }
-   	generate_list(Vet, n);
-	   #pragma omp parallel
-   {
-      #pragma omp single
- 		mergeSort(Vet, 0, n-1);
-   }
-   	generate_list(Vet, n);
-	   #pragma omp parallel
-   {
-      #pragma omp single
- 		mergeSort(Vet, 0, n-1);
-   }
-   	generate_list(Vet, n);
-	   #pragma omp parallel
-   {
-      #pragma omp single
- 		mergeSort(Vet, 0, n-1);
-   }
-   
+
 	return(0);
 }

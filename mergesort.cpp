@@ -3,8 +3,8 @@
 #include "omp.h"
 using namespace std;
 
-int n = 2000000;
-int * Vet = new int [2000000];
+int n = 60000000;
+int * Vet = new int [60000000];
 
 void generate_list(int * x, int n) {
    int i,j,t;
@@ -65,24 +65,6 @@ void print(int aux[], int n)
 int main(){
 	generate_list(Vet, n);
 	mergeSort(Vet, 0, n-1);
-	generate_list(Vet, n);
-	mergeSort(Vet, 0, n-1);
-	generate_list(Vet, n);
-	mergeSort(Vet, 0, n-1);
-	generate_list(Vet, n);
-	mergeSort(Vet, 0, n-1);
-	generate_list(Vet, n);
-	mergeSort(Vet, 0, n-1);
-	generate_list(Vet, n);
-	mergeSort(Vet, 0, n-1);
-	generate_list(Vet, n);
-	mergeSort(Vet, 0, n-1);
-	generate_list(Vet, n);
-	mergeSort(Vet, 0, n-1);
-	generate_list(Vet, n);
-	mergeSort(Vet, 0, n-1);
-	generate_list(Vet, n);
-	mergeSort(Vet, 0, n-1);	
 	
 	return(0);
 }
