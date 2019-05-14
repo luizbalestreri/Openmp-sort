@@ -1,10 +1,10 @@
 #include<iostream>
-#include<fstream>
 #include "omp.h"
 using namespace std;
 
 int n = 60000000;
 int * Vet = new int [60000000];
+double startTime, stopTime;
 
 void generate_list(int * x, int n) {
    int i,j,t;
@@ -56,11 +56,11 @@ void mergeSortSerial(int aux[], int left, int right){
 
 void mergeSort (int aux[], int left, int right){
 	if (left < right){
-		if ((right-left) > 100000){
+		if ((right-left) > 1000){
 			int middle = (left + right)/2;
-		   #pragma omp task firstprivate (aux, left, middle)
+		   #pragma omp task firstprivate (aux)
 				mergeSort(aux,left,middle); //call 1
-			#pragma omp task firstprivate (aux, middle, right)
+			#pragma omp task firstprivate (aux)
 				mergeSort(aux,middle+1,right); //call 2
 			#pragma omp taskwait
 			merge(aux,left,middle,right);
@@ -81,12 +81,10 @@ int main(){
 	generate_list(Vet, n);
 	omp_set_nested(1);
 	omp_set_num_threads(2);
-
-	   #pragma omp parallel
-   {
-      #pragma omp single
- 		mergeSort(Vet, 0, n-1);
-   }
-
+	#pragma omp parallel num_threads(2)
+	{	
+		#pragma omp single nowait
+ 			mergeSort(Vet, 0, n-1);
+   	}
 	return(0);
 }

@@ -1,10 +1,10 @@
 #include<iostream>
-#include<fstream>
 #include "omp.h"
 using namespace std;
 
 int n = 60000000;
 int * Vet = new int [60000000];
+double startTime, stopTime;
 
 void generate_list(int * x, int n) {
    int i,j,t;
@@ -65,6 +65,7 @@ void print(int aux[], int n)
 int main(){
 	generate_list(Vet, n);
 	mergeSort(Vet, 0, n-1);
+	
 	
 	return(0);
 }
